@@ -1,22 +1,26 @@
 class Solution():
-    def lengthOfLongestSubstring(self, string):
+    def lengthOfLongestSubstring(self, s):
         '''
         Return the length of the longest substring of
         non-repeating characters for a given string.
         '''
-        maxx = 0
-        for i in range(len(string)):
-            count = 1
-            seen = [string[i]]
-            for j in range(i+1, len(string)):
-                if string[j] not in seen:
-                    seen.append(string[j])
-                    count += 1
-                else:
-                    break
-            if count > maxx:
-                maxx = count
-        return maxx
+        if len(s) < 1:
+            return 0
+        if len(s) == 1:
+            return 1
+        maxlen = 0
+        hashset = set()
+        start = 0
+        i = 0
+        while i < (len(s)):
+            if s[i] not in hashset:
+                hashset.add(s[i])
+                maxlen = max(maxlen, (i - start) + 1)
+                i += 1
+            else:
+                hashset.remove(s[start])
+                start += 1 
+        return maxlen
 
 
 if __name__ == "__main__":
